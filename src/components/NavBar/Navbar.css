@@ -1,0 +1,8 @@
+.nav {
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    background-color: grey;
+    list-style-type: none;
+    color: white;
+}
