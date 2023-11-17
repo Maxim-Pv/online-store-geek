@@ -11,7 +11,7 @@
 /* PostsPage */
 
 .container-post {
-    margin: 30px;
+    margin: 50px;
 }
 
 .postsList {
@@ -24,30 +24,19 @@
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid grey;
+    color: grey
 }
 
+.postItem:hover {
+    border: 1px solid #213547;
+    color: #213547;
+}
 
 /* CreatePostPage */
 
 .form-container {
     height: 100vh;
     margin: 1.5em 3em;
-}
-
-.form {
-    padding: 0 3em;
-    height: 7em;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.input {
-    padding: 8px;
-}
-
-.btn {
-    width: 13em;
 }
 
 .post {
@@ -69,4 +58,36 @@
 .btn-container {
     display: flex;
     align-items: center;
+}
+
+
+/* OnePostPage */
+
+.container-forOnePost,
+.container-forDeletePost {
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.onePost-text {
+    width: 50%;
+    margin-bottom: 15px;
+}
+
+/* DeletePost */
+
+.deletePost {
+    width: 50%;
+    margin-bottom: 20px; 
+    padding: 10px;
+    border: 1px dashed grey;
+}
+
+.container-forBtnDeletePost {
+    width: 100px;
+    display: flex;
+    justify-content: space-between;
 }

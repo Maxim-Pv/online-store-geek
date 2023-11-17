@@ -1,0 +1,17 @@
+
+.form {
+    padding: 0 3em;
+    height: 7em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.input {
+    padding: 8px;
+}
+
+.btn {
+    width: 13em;
+    color: #213547;
+}

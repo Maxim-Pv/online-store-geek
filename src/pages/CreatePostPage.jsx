@@ -1,10 +1,27 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import PostForm from '../components/Form/PostForm';
+import axios from 'axios';
 import './StyleForPages.css';
 
 const CreatePostPage = () => {
   const [posts, setPosts] = useState([]);
   const [createNewPost, setCreateNewPost] = useState({ title: '', body: '' });
+  const navigate = useNavigate();
 
+  const postRequest = async () => {
+    try {
+      await axios.post('https://dummyjson.com/posts/add', {
+      title: createNewPost.title,
+      body: createNewPost.body,
+      userId: 1,  
+      });   
+      navigate('/posts') 
+    } catch (error) {
+        console.error(error)
+      }
+  }
+  
   const addNewPost = () => {
     const newPost = {
       ...createNewPost,
@@ -20,30 +37,16 @@ const CreatePostPage = () => {
 
   return (
     <div className='form-container'>
-      <form
-        className='form'
+      <PostForm 
+        createNewPost={createNewPost} 
+        setCreateNewPost={setCreateNewPost} 
         onSubmit={(e) => {
-          e.preventDefault();
-          addNewPost();
-        }}
-      >
-        <input
-          className='input'
-          type="text"
-          value={createNewPost.title}
-          onChange={(e) => setCreateNewPost({ ...createNewPost, title: e.target.value })}
-          placeholder='Post title'
-        />
-        <input
-          className='input'
-          type='text'
-          value={createNewPost.body}
-          onChange={(e) => setCreateNewPost({ ...createNewPost, body: e.target.value })}
-          placeholder='Post description'
-        />
-        <button className='btn' type="submit">Create post</button>
-      </form>
-
+         e.preventDefault();
+         postRequest();
+         addNewPost();
+        }} 
+      />
+        
       <div className='postsList'>
         {posts.map((p) => (
           <div key={p.id} className='post'>
