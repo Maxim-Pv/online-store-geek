@@ -10,24 +10,24 @@
 
 /* PostsPage */
 
-.container-post {
+.container {
     margin: 50px;
 }
 
-.postsList {
+.list {
     margin: 0;
     padding: 0;
     list-style-type: none;
 }
 
-.postItem {
+.item {
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid grey;
     color: grey
 }
 
-.postItem:hover {
+.item:hover {
     border: 1px solid #213547;
     color: #213547;
 }
@@ -90,4 +90,14 @@
     width: 100px;
     display: flex;
     justify-content: space-between;
+}
+
+/* UserPage */
+
+.container-forBtnUser {
+    margin: 30px
+}
+
+.hidden {
+    display: none;
 }

@@ -1,5 +1,6 @@
 import './PostForm.css'
 
+
 const PostForm = ({ createNewPost, setCreateNewPost, onSubmit }) => {
     return (
         <form className='form' onSubmit={onSubmit}>

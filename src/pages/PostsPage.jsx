@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
+import { API } from '../api'
 import './StyleForPages.css'
 
 const PostsPage = () => {
@@ -9,7 +9,7 @@ const PostsPage = () => {
 
     useEffect(() => {
         const getPosts = async () => {
-            const response = await axios.get('https://dummyjson.com/posts')
+            const response = await API.get('/posts')
             setPosts(response.data.posts)
             setIsPostsLoading(false)
         }
@@ -18,13 +18,13 @@ const PostsPage = () => {
 
 
     return (
-        <div className='container-post'>
+        <div className='container'>
             {isPostsLoading
                 ? <h2>Loading...</h2>
-                : <ul className='postsList'>
+                : <ul className='list'>
                     {posts.map((post) => (
                         <Link key={post.id} to={`/posts/${post.id}`}>
-                            <li className='postItem'>                            
+                            <li className='item'>                            
                                 <strong>{post.title}</strong> 
                                 <div>{post.body}</div>                                                     
                             </li>
