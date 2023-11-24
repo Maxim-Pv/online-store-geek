@@ -12,6 +12,8 @@ const UserPage = () => {
     const [isPostsVisible, setIsPostsVisible] = useState(false);
     const [isTodosVisible, setIsTodosVisible] = useState(false);
     
+    let url; 
+    const userParam = searchParams.get('user');
 
     useEffect(() => {
         const getUser = async () => {
@@ -22,28 +24,20 @@ const UserPage = () => {
       }, [id]);
 
     useEffect(() => {
+        userParam ? url = `/posts/user/${userParam}` : url = '/posts/user/' + id;
         const getPosts = async () => {
-            if (searchParams.get('user') !== null) {
-                const response = await API.get(`/posts?user=${id}`);
-                setPosts(response.data.posts)
-            } else {
-                const response = await API.get('/posts');
-                setPosts(response.data.posts)
-            }      
+            const response = await API.get(url);
+            setPosts(response.data.posts)    
         }
-       getPosts()         
+        getPosts()         
     }, [id, searchParams])
 
     useEffect(() => {
+        userParam ? url = `/todos/user/${userParam}` : url = '/todos/user/' + id;
         const getTodos = async () => {
-            if (searchParams.get('user') !== null) {
-                const response = await API.get(`/todos?user=${id}`);
+                const response = await API.get(url);
                 setTodos(response.data.todos)
-            } else {
-                const response = await API.get('/todos');
-                setTodos(response.data.todos)
-            }   
-        }
+        }   
        getTodos()         
     }, [id, searchParams])
 
@@ -60,7 +54,6 @@ const UserPage = () => {
         setSearchParams({ user: id });
     };
 
-
   return (
     <div> 
         <div className='container-forOnePost'>
@@ -75,7 +68,7 @@ const UserPage = () => {
                 <ul className={`list ${isPostsVisible ? '' : 'hidden'}`}>
                     {posts.map((post) => (
                         <li key={post.id}>
-                            <p>
+                            <p className='content'>
                                 <Link to={`/posts/${post.id}`}>{post.title}</Link>
                             </p>                              
                         </li>
@@ -84,7 +77,7 @@ const UserPage = () => {
                 <ul className={`list ${isTodosVisible ? '' : 'hidden'}`}>
                     {todos.map((todo) => (
                         <li key={todo.id}>
-                            <p>
+                            <p className='content'>
                                 {todo.todo}
                             </p>                              
                         </li>

@@ -101,3 +101,8 @@
 .hidden {
     display: none;
 }
+
+.content {
+    padding: 10px;
+    border: 1px dashed;
+}
