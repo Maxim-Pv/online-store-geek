@@ -3,7 +3,7 @@ import './StyleForPages.css'
 
 const MainPage = () => {
   return (
-    <div className='main-container'>
+    <div className='container'>
       <h1>MainPage</h1>
     </div>
     

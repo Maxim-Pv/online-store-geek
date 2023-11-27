@@ -1,8 +1,17 @@
 .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     padding: 20px;
     display: flex;
     justify-content: space-around;
     background-color: grey;
     list-style-type: none;
     color: white;
+    z-index: 1000;
+}
+
+.cart-icon {
+    width: 100px;
 }

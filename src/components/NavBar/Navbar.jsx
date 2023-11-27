@@ -1,16 +1,18 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import './Navbar.css'
+import { useSelector } from 'react-redux'
 
 const Navbar = () => {
+  const cartItems = useSelector((state) => state.cart.items);
+
   return (
     <nav className='nav'>
       <NavLink to='/'>Main</NavLink>
-      <NavLink to='/posts'>Posts</NavLink>
-      <NavLink to='/users'>Users</NavLink>
-      <NavLink to='/create-post'>Create post</NavLink>    
-      <NavLink to='/inputUserData'>InputUserData</NavLink>
-      <NavLink to='/outputUserData'>OutputUserData</NavLink>  
+      <NavLink to='/products'>Products</NavLink>  
+      <div className="cart-icon">
+        <NavLink to='/cart'>Cart ({cartItems.length})</NavLink>
+      </div>
     </nav>
   )
 }
