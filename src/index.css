@@ -10,6 +10,7 @@ a {
 
 a:hover {
   color: #213547;
+  transition: color .2s linear;
 }
 
 nav a.active {
@@ -33,7 +34,7 @@ h1 {
 }
 
 button {
-  width: 5rem;
+  width: 8rem;
   border-radius: 8px;
   border: none;
   padding: 5px 10px;
@@ -43,8 +44,9 @@ button {
 }
 
 button:hover {
-  background-color: #213547;
+  background-color: #009688;
   color: white;
+  transition: background-color .2s linear, color .2s linear;
 }
 
 button:focus,

@@ -1,43 +1,35 @@
-import { createSlice } from "@reduxjs/toolkit";
-import productsData from '../products.json'
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
-const productsSlice = createSlice({
-    name: 'products',
-    initialState: {
-        products: productsData,
-        cart: [],        
-    },
-    reducers: {
-        addToCart: (state,action) => {
-            const isItemInCart = state.cart.find(item => item._id === action.payload._id);
-            if (!isItemInCart) {
-                state.cart.push({...action.payload, quantity: 1})
-            }                
-        },
-        increaseQuantity: (state,action) => {
-            const itemToIncrease = state.cart.find(item => item._id === action.payload._id);
-            if (itemToIncrease) {
-                itemToIncrease.quantity += 1;
-            }
-        },
-        decreaseQuantity: (state,action) => {
-            const itemToIncrease = state.cart.find(item => item._id === action.payload._id);
-            if (itemToIncrease) {
-                if (itemToIncrease.quantity > 1) {
-                    itemToIncrease.quantity -= 1;
-                } else {
-                    return 
-                }               
-            }
-        },
-        removeFromCart: (state,action) => {
-            if(action.payload.quantity === 1) {
-                state.cart = state.cart.filter(item => item._id !== action.payload._id)
-            } 
-        },
-   
-    }
+export const fetchProducts = createAsyncThunk(
+  'products/fetchProducts',
+  async () => {
+      const response = await axios.get('https://dummyjson.com/products')
+      return response.data
 })
 
-export const productsActions = productsSlice.actions;
+const productsSlice = createSlice({
+  name: 'products',
+  initialState: {
+      products: [],
+      isLoading: false,
+      error: null,       
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchProducts.pending, (state, action) => {
+      state.error = null
+      state.isLoading = true;
+    })
+    builder.addCase(fetchProducts.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.products = action.payload
+    })
+    builder.addCase(fetchProducts.rejected, (state, action) => {
+        state.isLoading = false
+        state.error = action.error.message
+    })
+  }
+})
+
 export const productsReducer = productsSlice.reducer;

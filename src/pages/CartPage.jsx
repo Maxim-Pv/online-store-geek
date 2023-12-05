@@ -1,20 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
-import { productsActions } from "../store/productsSlice";
+import { cartActions } from "../store/cartSlice";
 
 const CartPage = () => {
-  const cartItems = useSelector((state) => state.products.cart);
+  const cartItems = useSelector((state) => state.cart.products);
   const dispatch = useDispatch();
 
   const handleIncrease = (id) => {
-    dispatch(productsActions.increaseQuantity(id));
+    dispatch(cartActions.increaseQuantity(id));
   }
 
   const handleDecrease = (id) => {
-    dispatch(productsActions.decreaseQuantity(id));
+    dispatch(cartActions.decreaseQuantity(id));
   }
 
   const handleDeleteItem = (id) => {
-    dispatch(productsActions.removeFromCart(id))
+    dispatch(cartActions.removeFromCart(id))
   }
 
   return (
@@ -23,18 +23,18 @@ const CartPage = () => {
         ? <h2>Cart is empty</h2>
         : <ul className='list'>             
           {cartItems.map((item) => (
-                <li key={item._id} style={{backgroundColor: item.color}} className='item'>  
+                <li key={item.id} className='item'>  
                   <div>
-                    <h4>{item.name} {item.price}</h4> 
-                    <img src={item.picture} alt="picture" />
+                    <h4>{item.title} {item.price}</h4> 
+                    <img className='img' src={item.thumbnail} alt="picture" />
                   </div>                          
                   <p>{item.description}</p>
                   <div className='quantityControls'>
-                    <button onClick={() => handleDecrease(item)}>-</button>
+                    <button className="btnCount" onClick={() => handleDecrease(item)}>-</button>
                     <strong className="count">{item.quantity}</strong>
-                    <button onClick={() => handleIncrease(item)}>+</button>
+                    <button className="btnCount" onClick={() => handleIncrease(item)}>+</button>
                   </div>
-                  <div className='priceAndbtn'>
+                  <div className='btnContainer'>
                     <button className='btn btn-delete' onClick={() => handleDeleteItem(item)}>Delete</button>
                   </div>
                 </li>

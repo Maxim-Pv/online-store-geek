@@ -12,6 +12,26 @@
     z-index: 1000;
 }
 
-.cart-icon {
-    width: 100px;
+.cart {
+  position: relative;
+}
+
+.selectedProducts {
+  position: absolute;
+  padding: 1px 5px;
+  border-radius: 50%;
+  font-size: 9px;
+  font-weight: 700;
+  background-color: red;
+  color: white;
+  transform: translateX(-70%) translateY(-40%);
+}
+
+.cartIcon path {
+  fill: white;
+}
+
+.cartIcon:hover path {
+  fill: #213547;
+  transition: fill .2s linear;
 }
